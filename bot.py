@@ -857,7 +857,7 @@ while(2 > 1):
                             print('new message')
                             accept = True
                             if chat['abs_object']['type'] == 'User' and not chat['object_guid'] in qrozAdmins and open('your_channel.txt','r').read() != '' and not chat['object_guid'] in black_users:
-                                if not chat['object_guid'] in verfied_users and text.startswith('!'):
+                                if not chat['object_guid'] in verfied_users:
                                     is_joined = bot.checkJoinChannel(chat['object_guid'], open('your_channel.txt','r').read())
                                     if is_joined == 'no exist':
                                         accept = False
@@ -869,8 +869,10 @@ while(2 > 1):
                                         fp = open('verfied_users.txt','a')
                                         fp.write('\n' + chat['object_guid'])
                                         fp.close()
+                                        if text.startswith('!') == False:
+                                            bot.sendMessage(chat['object_guid'], 'برای استفاده از ربات دستور زیر را بفرستید\n!start\n❤')
                                         accept = True
-
+                            
                             elif chat['object_guid'] in black_users:
                                 accept = False
                             if accept == True:        
