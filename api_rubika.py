@@ -186,7 +186,7 @@ class Bot:
 		else:
 			t = len(bytef) / 131072
 			t += 1
-			t = random._floor(t)
+			t = math.floor(t)
 			for i in range(1,t+1):
 				if i != t:
 					k = i - 1
@@ -756,7 +756,7 @@ class Bot:
 		t = False
 		while t == False:
 			try:
-				time_stamp = str(random._floor(datetime.datetime.today().timestamp()) - 200)
+				time_stamp = str(math.floor(datetime.datetime.today().timestamp()) - 200)
 				p = post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
 					"method":"getChatsUpdates",
 					"input":{
@@ -777,7 +777,7 @@ class Bot:
 		return p
 
 	def get_updates_chat(self, chat_id):
-		time_stamp = str(random._floor(datetime.datetime.today().timestamp()) - 200)
+		time_stamp = str(math.floor(datetime.datetime.today().timestamp()) - 200)
 		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
 			"method":"getMessagesUpdates",
 			"input":{
@@ -794,7 +794,7 @@ class Bot:
 		}))},url="https://messengerg2c67.iranlms.ir/").json().get("data_enc"))).get("data").get("updated_messages")
 	
 	def my_sticker_set(self):
-		time_stamp = str(random._floor(datetime.datetime.today().timestamp()) - 200)
+		time_stamp = str(math.floor(datetime.datetime.today().timestamp()) - 200)
 		return loads(self.enc.decrypt(post(json={"api_version":"5","auth": self.auth,"data_enc":self.enc.encrypt(dumps({
 			"method":"getMyStickerSets",
 			"input":{},

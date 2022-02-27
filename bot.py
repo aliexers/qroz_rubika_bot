@@ -418,7 +418,7 @@ def get_font(text,chat,bot):
         if hasInsult(name_user)[0] == False and chat['abs_object']['type'] == 'Group':
             bot.sendMessage(chat['object_guid'], 'نتایج کامل به پیوی شما ارسال شد', chat['last_message']['message_id'])
             bot.sendMessage(chat['last_message']['author_object_guid'], 'نتایج یافت شده برای (' + name_user + ') : \n\n'+text)                                        
-        elif chat['abs_object']['type'] == 'User':
+        elif hasInsult(name_user)[0] == False and chat['abs_object']['type'] == 'User':
             bot.sendMessage(chat['object_guid'], text , chat['last_message']['message_id'])
     except:
         print('code bz font err')
@@ -548,13 +548,13 @@ def get_trans(text,chat,bot):
         text_trans = t2
         if hasInsult(text_trans)[0] == False:
             t = Translator()
-            text = t.translate(text_trans,lang).text
+            text = 'متن ترجمه شده به ('+lang + ') :\n\n' + t.translate(text_trans,lang).text
             jj = hasInsult(text)
             if jj[0] != True:
                 bot.sendMessage(chat['object_guid'], text, chat['last_message']['message_id'])
         elif chat['abs_object']['type'] == 'User':
             t = Translator()
-            text = t.translate(text_trans,lang).text
+            text = 'متن ترجمه شده به ('+lang + ') :\n\n' + t.translate(text_trans,lang).text
             jj = hasInsult(text)
             if jj[0] != True:
                 bot.sendMessage(chat['object_guid'], text, chat['last_message']['message_id'])
@@ -615,7 +615,7 @@ def get_font_fa(text,chat,bot):
         if hasInsult(site)[0] == False and chat['abs_object']['type'] == 'Group':
             bot.sendMessage(chat['object_guid'], 'نتایج کامل به پیوی شما ارسال شد', chat['last_message']['message_id'])
             bot.sendMessage(chat['last_message']['author_object_guid'], 'نتایج یافت شده برای (' + site + ') : \n\n'+text)                                        
-        elif chat['abs_object']['type'] == 'User':
+        elif hasInsult(name_user)[0] == False and chat['abs_object']['type'] == 'User':
             bot.sendMessage(chat['object_guid'], text , chat['last_message']['message_id'])
     except:
         print('code bz font fa err')
@@ -838,7 +838,7 @@ auths = open('multi_acconting.txt','r').read().split('\n')
 auth = auths[0]
 bot = Bot(auth)
 list_message_seened = []
-time_reset = random._floor(datetime.datetime.today().timestamp()) + 350
+time_reset = math.floor(datetime.datetime.today().timestamp()) + 350
 while(2 > 1):
     try:
         chats_list:list = bot.get_updates_all_chats()
@@ -872,7 +872,7 @@ while(2 > 1):
                                         if text.startswith('!') == False:
                                             bot.sendMessage(chat['object_guid'], 'برای استفاده از ربات دستور زیر را بفرستید\n!start\n❤')
                                         accept = True
-                            
+
                             elif chat['object_guid'] in black_users:
                                 accept = False
                             if accept == True:        
@@ -1202,7 +1202,7 @@ while(2 > 1):
             print('no update ')
     except:
         print('qroz err koli')
-    time_reset2 = random._floor(datetime.datetime.today().timestamp())
+    time_reset2 = math.floor(datetime.datetime.today().timestamp())
     if list_message_seened != [] and time_reset2 > time_reset:
         list_message_seened = []
-        time_reset = random._floor(datetime.datetime.today().timestamp()) + 350
+        time_reset = math.floor(datetime.datetime.today().timestamp()) + 350
